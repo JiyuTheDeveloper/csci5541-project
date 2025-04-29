@@ -1,0 +1,4 @@
+Group 1,Group 2,Group 1 Mean,Group 2 Mean,t-statistic,p-value,Significant
+Asian,Hispanic,-0.8333333333333334,-1.0,1.783765170031689,0.0831349655453961,False
+Asian,European,-0.8333333333333334,-1.0,1.783765170031689,0.0831349655453961,False
+Hispanic,European,-1.0,-1.0,,,False
