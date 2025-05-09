@@ -89,13 +89,13 @@
     <hr>
     <h2 id="abstract">Abstract</h2>
     <p>
-      Large‑scale sentiment studies of Reddit's mental‑health communities require reliable knowledge of who is speaking, yet demographic cues such as gender, race, and queer identity are rarely explicit and have traditionally been identified by slow, manual coding. We introduce a two‑stage pipeline that first filters posts with carefully designed keyword lists and then replaces manual labeling with a lightweight, multi‑label DistilBERT classifier. Trained on a gold‑standard set of 1,724 hand‑annotated posts, the model accurately predicts four binary attributes—mental‑health mention, gender identity, racial identity, and queer identity—allowing us to automate what was previously weeks of expert effort. The resulting, fully labeled corpus reveals that sentiment on mental‑health subreddits differs markedly across social identities; for example, posts authored by queer‑identified users are consistently more negative than those without queer markers, and male-identified posts show slightly more positive sentiment than female-identified ones. By removing the annotation bottleneck, our approach enables far larger, demographically informed analyses of online mental‑health discourse.
+      Large‑scale sentiment studies of Reddit's mental‑health communities require reliable knowledge of who is speaking, yet demographic cues such as gender, race, and queer identity are rarely explicit and have traditionally been identified by slow, manual coding. We introduce a two‑stage pipeline that first filters posts with carefully designed keyword lists and then replaces manual labeling with a lightweight, multi‑label DistilBERT classifier. Trained on a gold‑standard set of 1,782 hand‑annotated posts, the model accurately predicts four binary attributes—mental‑health mention, gender identity, racial identity, and queer identity—allowing us to automate what was previously weeks of expert effort. The resulting, fully labeled corpus reveals that sentiment on mental‑health subreddits differs markedly across social identities; for example, posts authored by queer‑identified users are consistently more negative than those without queer markers, and male-identified posts show slightly more positive sentiment than female-identified ones. By removing the annotation bottleneck, our approach enables far larger, demographically informed analyses of online mental‑health discourse.
     </p>
 
     <hr>
     <h2 id="introduction">Motivation</h2>
     <p>
-      Our ultimate goal was to develop a mental health-focused dataset, establish a robust annotation framework, and then analyze the differences between subpopulations. We then explored how to create an automated classifier to streamline annotation for demographic information in social media posts in future work, saving both time and effort.
+      Our ultimate goal was to develop a mental health-focused dataset, establish a robust annotation framework, and then analyze the differences between subpopulations. We then explored how to create an automated classifier that can predict the presence of these demographic tags to streamline annotation for demographic information in social media posts in future work, saving both time and effort.
       Current sentiment analysis approaches often apply a generalized perspective without considering demographic factors, limiting our understanding of unique challenges faced by different groups.</strong>
     </p>
 
@@ -105,6 +105,29 @@
     </p>
 
     <hr>
+    <h2 id="introduction">Scientific Novelty</h2>
+    <p>
+      <ol>
+        <li>
+          <strong>Demographic-enriched sentiment analysis</strong> – Unlike most mental health sentiment analyses that treat users as a homogeneous group (e.g., Benrouba and Boudour's 2023 work <a href="#benrouba2023">[1]</a> which analyzes emotional sentiment for mental health safety without demographic considerations), our work specifically examines how sentiment varies across social identities. While Rai et al. (2024) <a href="#rai2024">[2]</a> explored cross-cultural differences in mental health expressions, they focused only on geographic/national identity rather than personal demographic characteristics like gender or LGBTQ+ status.
+        </li>
+        <li>
+          <strong>Automated demographic inference</strong> – We developed a multi-label model that can simultaneously predict four demographic and mental health attributes from text alone, addressing a major bottleneck in demographic analysis of anonymous content. Prior approaches like those used by Park et al. (2018) <a href="#park2018">[3]</a> either ignored demographic factors entirely or relied on manual annotation processes that couldn't scale. Our system's micro-accuracy of 78.7% demonstrates significant improvement over keyword-based approaches that fail to capture contextual cues.
+        </li>
+        <li>
+          <strong>Two-stage pipeline approach</strong> – Our methodology uniquely combines keyword filtering with transformer-based multi-label classification. This contrasts with Rani et al.'s (2024) <a href="#rani2024">[4]</a> approach to mental health dataset annotation, which relied on a single-stage expert labeling process without automated classification. Their method requires weeks of expert effort for each new dataset, while our pipeline can process thousands of posts automatically once trained.
+        </li>
+        <li>
+          <strong>Scalable annotation pipeline</strong> – We developed a structured annotation protocol specifically for demographic inference from anonymous posts, which distinguishes our work from Liu et al. (2022) <a href="#liu2022">[5]</a>, who focused on depression detection without accounting for demographic variation. Their supervised learning approaches targeted mental health conditions directly rather than building demographic context for more nuanced analysis.
+        </li>
+        <li>
+          <strong>Interdisciplinary integration</strong> – Our methodology bridges computational linguistics, mental health informatics, and social identity research in a way that enables broader insights into online mental health discourse. Prior work by Le Glaz et al. (2021) <a href="#leglaz2021">[6]</a> identified the lack of interdisciplinary approaches as a significant limitation in mental health NLP research. Our work directly addresses this gap.
+        </li>
+      </ol>
+      
+    </p>
+    <hr>
+    
     <h2 id="approach">Data Curation</h2>
     <p>
       We collected Reddit posts related to mental health, specifically from the Reddit Mental Health Dataset (RMHD) on Kaggle. These posts were specifically from the months of August to November of 2019. We wanted to avoid any bias or impact from the COVID-19 pandemic, so we utilized the months prior to major worldwide impacts. We did not previously consider how the United States presidential election could have affected this when we chose these months; however, there was no mention explicitly regarding the election.
@@ -155,12 +178,42 @@
     <p>If there was any doubt regarding classification, the annotator would reach out to fellow annotators for ruling.</p>
 
     <hr>
-
-    <p><b>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</b></p>
-
-    <p>
-      Annotating the data was a lot more time-consuming and mentally draining than anticipated. Our rigorous labeling of the posts meant we spent more time on each post than anticipated, especially if the posts were long (approaching our 3000 character maximum), confusing, or required an extra check by another annotator.
-    </p>
+    
+    <h2 id="approach">Challenges</h2>
+<ul style="list-style-type: disc; margin-left: 20px;">
+  <li>
+    Annotation
+    <ul style="list-style-type: circle; margin-left: 20px;">
+      <li>
+        Annotating demographic information presented multiple challenges:
+        <ul style="list-style-type: square; margin-left: 20px;">
+          
+          <li>  
+            <strong> Time Consuming </strong> -  Annotating the data was a lot more time-consuming and mentally draining than anticipated. Our rigorous labeling of the posts meant we spent more time on each post than anticipated, especially if the posts were long (approaching our 3000 character maximum), confusing, or required an extra check by another annotator. Since we knew that annotation would need to be systematic to keep the differences between annotators low, we applied a trial and error where we would label the first 30 or so samples across our datasets (since we split them by presence or absence of flags). This allowed us to have a key idea of how annotation would go for the remainder of our samples.
+          </li>
+          
+          <li>
+            <strong>Imbalanced label distribution</strong> – Demographic information was unevenly represented, with racial identity present in only ~5% of posts and gender in ~16%. To address this, we carefully evaluated performance metrics that account for class imbalance (macro-F1) and implemented balanced sampling during training.
+          </li>
+          <li>
+            <strong>Inference complexity</strong> – Determining demographic information from text required careful consideration of contextual clues. Our annotation framework needed to distinguish between mentions of others versus self-identification. We refined our guidelines through iterative testing on sample posts.
+          </li>
+          <li>
+            <strong>Ambiguous identity expressions</strong> – Users expressed identities in various ways, sometimes using slang or community-specific terminology. Our approach incorporated an expansive dictionary of identity terms and manual verification during the gold-standard dataset creation.
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Ethics
+    <ul style="list-style-type: circle; margin-left: 20px;">
+      <li>
+        <strong>Ethical considerations</strong> – We recognized the sensitivity of inferring identity characteristics. Our binary classification approach (presence/absence of identity markers) aimed to minimize assumptions while still capturing relevant patterns.
+      </li>
+    </ul>
+  </li>
+</ul>
 
     <hr>
 
@@ -175,52 +228,105 @@
     <hr>
     <h1 id="Models">Models</h1>
     <h2 id="Models">Model 1: Vader Sentiment</h2>
-    <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_overall_sentiment_distribution_pie.png">
-    </div>
 
     <h3 id="Models">Model 1: Gender Identity</h3>
     <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_gender_sentiment_distribution.png">
+      <img style="height: 300px;" alt="" src="./files/Graphs/VADER_gender_sentiment_distribution.png">
     </div>
     <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_gender_sentiment_heatmap.png">
+      <img style="height: 300px;" alt="" src="./files/Graphs/VADER_gender_sentiment_heatmap.png">
     </div>
+
     <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_gender_sentiment_stacked.png">
-    </div>
-    <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_gender_significance_tests.png">
+      <img style="height: 300px;" alt="" src="./files/Graphs/VADER_gender_significance_tests.png">
     </div>
 
     <h3 id="Models">Model 1: Queer Identity</h3>
     <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_queer_sentiment_distribution.png">
+      <img style="height: 300px;" alt="" src="./files/Graphs/VADER_SUB_queer_sentiment_distribution.png">
     </div>
     <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_queer_sentiment_heatmap.png">
+      <img style="height: 300px;" alt="" src="./files/Graphs/VADER_SUB_queer_sentiment_heatmap.png">
     </div>
+
     <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_queer_sentiment_stacked.png">
-    </div>
-    <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_queer_significance_tests.png">
+      <img style="height: 300px;" alt="" src="./files/Graphs/VADER_SUB_queer_significance_tests.png">
     </div>
 
     <h3 id="Models">Model 1: Race Identity</h3>
     <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_race_sentiment_distribution.png">
+      <img style="height: 300px;" alt="" src="./files/Graphs/VADER_race_sentiment_distribution.png">
     </div>
     <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_race_sentiment_heatmap.png">
-    </div>
-    <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_race_sentiment_stacked.png">
-    </div>
-    <div style="text-align: center;">
-      <img style="height: 300px;" alt="" src="./files/vader_race_significance_tests.png">
+      <img style="height: 300px;" alt="" src="./files/Graphs/VADER_racial_sentiment_heatmap.png">
     </div>
 
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/VADER_racial_significance_tests.png">
+    </div>
+
+    <h2 id="Models">Model 2: DistilBERT</h2>
+
+    <h3 id="Models">Model 2: Gender Identity</h3>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/BERT_gender_sentiment_distribution.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/BERT_gender_sentiment_heatmap.png">
+    </div>
+
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/BERT_gender_significance_tests.png">
+    </div>
+
+    <h3 id="Models">Model 2: Queer Identity</h3>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/BERT_SUB_queer_sentiment_distribution.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/BERT_SUB_queer_sentiment_heatmap.png">
+    </div>
+
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/Graphs/BERT_SUB_queer_significance_tests.png">
+    </div>
+
+    <h3 id="Models">Model 2: Race Identity</h3>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/BERT_race_sentiment_distribution.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/BERT_racial_sentiment_heatmap.png">
+    </div>
+
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Graphs/BERT_racial_significance_tests.png">
+    </div>
+
+
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Macro-F1</td>
+        <td>0.500</td>
+      </tr>
+      <tr>
+        <td>Micro-F1</td>
+        <td>0.787</td>
+      </tr>
+      <tr>
+        <td>Micro-Accuracy</td>
+        <td>0.877</td>
+      </tr>
+      <tr>
+        <td>Subset Accuracy</td>
+        <td>0.593</td>
+      </tr>
+    </table>
+    
     <hr>
     <h1 id="Conclusion">Conclusion</h1>
 
@@ -231,5 +337,16 @@
     <h2>Next Steps</h2>
     <p>We plan to extend our model to other social media platforms and improve its accuracy over time with a more diverse and larger dataset.</p>
   </div>
+
+  <h3>References</h3>
+<ol>
+  <li id="benrouba2023">Benrouba & Boudour (2023)</li>
+  <li id="rai2024">Rai et al. (2024)</li>
+  <li id="park2018">Park et al. (2018)</li>
+  <li id="rani2024">Rani et al. (2024)</li>
+  <li id="liu2022">Liu et al. (2022)</li>
+  <li id="leglaz2021">Le Glaz et al. (2021)</li>
+</ol>
+
 </body>
 </html>
