@@ -40,23 +40,17 @@
 
       <div class="authors-wrapper">
         <div class="author-container">
-          <div class="author-image">
-            <img src="">
-          </div>
+
           <p>Jiyu Huang</p>
         </div>
 
         <div class="author-container">
-          <div class="author-image">
-            <img src="">
-          </div>
+
           <p>Ziqi Zhou</p>
         </div>
 
         <div class="author-container">
-          <div class="author-image">
-            <img src="./files/kylie_graduation.jpeg">
-          </div>
+
           <p>Kylie Dyke</p>
         </div>
       </div>
@@ -77,7 +71,7 @@
           </span>
           <span class="link-block">
             <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark is-outlined">
-              <span>Model Weights</span>
+              <span>Datasets</span>
             </a>
           </span>
         </div>
@@ -337,23 +331,72 @@
     <h1 id="Conclusion">Conclusion</h1>
 
     <p>
-      Our hypothesis was that sentiment towards mental health would differ significantly across demographic groups, reflecting different cultural attitudes, experiences of stigma, and help-seeking behaviors. The automated classification approach would allow us to scale this analysis to much larger datasets than would be possible with manual annotation alone. The results confirm significant sentiment variations across demographic groups, validating both our methodological approach and underlying hypothesis.
-    <br> The model performed best on the more frequent labels (e.g., mental health mention) and showed lower but still useful performance on the rarer demographic attributes.
+      Our project demonstrates that sentiment toward mental health differs significantly across demographic groups in online discussions. By developing an effective multi-label classifier for demographic information, we've created a scalable approach to analyze these differences in large datasets of anonymous content.
+      The observed patterns—including more negative sentiment among female and transgender users and more positive sentiment among male and Hispanic users—point to important variations in how different groups express and discuss mental health. These differences align with real-world disparities documented in recent research. The Trevor Project (2023) found that 41\% of LGBTQ+ youth had seriously considered suicide \cite{trevor2023}, highlighting the mental health challenges faced by these communities. Similarly, Olfson et al. (2023) documented substantial disparities in mental health care access across racial-ethnic groups \cite{olfson2023}, which may influence how different communities discuss mental health online.
+      By enabling demographic-aware analysis of mental health content, our work supports more nuanced understanding of how identity shapes mental health experiences and expressions. This approach has significant potential to inform more tailored, culturally sensitive mental health interventions and support resources for diverse populations. Given that 23.1\% of US adults experience mental illness \cite{nimh2023}, but treatment patterns vary dramatically by demographic factors \cite{olfson2023}, tools that help understand these patterns are increasingly important.
+      Our methodology also represents an important advance in computational approaches to demographic inference from anonymous content, with potential applications beyond mental health to other domains where understanding demographic patterns is important but demographic data is not explicitly available.
     </p>
 
     <h2>Next Steps</h2>
-    <p>We plan to extend our model to other social media platforms and improve its accuracy over time with a more diverse and larger dataset.</p>
+    <p>Moving foward, it would be best to annotate more posts to try to even out the imbalance and work on a model that can classify by more downstream labels. We would also like to then test our classifier on other social media platform hosts. If this classifier can become accurate enough it will be a tool that can be used by many to survey the current attitutde towards mental health in different communities.</p>
   </div>
 
-  <h3>References</h3>
+<h2 id="references">References</h2>
 <ol>
-  <li id="benrouba2023">Benrouba & Boudour (2023)</li>
-  <li id="rai2024">Rai et al. (2024)</li>
-  <li id="park2018">Park et al. (2018)</li>
-  <li id="rani2024">Rani et al. (2024)</li>
-  <li id="liu2022">Liu et al. (2022)</li>
-  <li id="leglaz2021">Le Glaz et al. (2021)</li>
+  <li id="liu2022">
+    Liu, D., Feng, X. L., Ahmed, F., Shahid, M., & Guo, J. (2022). 
+    Detecting and Measuring Depression on Social Media Using a Machine Learning Approach: Systematic Review. 
+    <em>JMIR Mental Health</em>, <strong>9</strong>(3), e27244.
+  </li>
+  <li id="park2018">
+    Park, A., Conway, M., & Chen, A. T. (2018). 
+    Examining thematic similarity, difference, and membership in three online mental health communities from Reddit: A text mining and visualization approach. 
+    <em>Computers in Human Behavior</em>, <strong>78</strong>, 98–112.
+  </li>
+  <li id="rai2024">
+    Rai, S., Shelat, K., Jain, D. R., Sivabalan, K., Cho, Y. M., Redkar, M., Sawant, S., Ungar, L. H., & Guntuku, S. C. (2024). 
+    Cross-Cultural Differences in Mental Health Expressions on Social Media.
+  </li>
+  <li id="reece2017">
+    Reece, A. G., Reagan, A. J., Lix, K. L. M., Dodds, P. S., Danforth, C. M., & Langer, E. J. (2017). 
+    Forecasting the onset and course of mental illness with Twitter data. 
+    <em>Scientific Reports</em>, <strong>7</strong>(1), 13006.
+  </li>
+  <li id="zhang2022">
+    Zhang, T., Schoene, A. M., Ji, S., et al. (2022). 
+    Natural language processing applied to mental illness detection: a narrative review. 
+    <em>npj Digital Medicine</em>, <strong>5</strong>, 46.
+  </li>
+  <li id="benrouba2023">
+    Benrouba, F., & Boudour, R. (2023). 
+    Emotional sentiment analysis of social media content for mental health safety. 
+    <em>Social Network Analysis and Mining</em>, <strong>13</strong>(1), 17.
+  </li>
+  <li id="leglaz2021">
+    Le Glaz, A., Haralambous, Y., Kim-Dufor, D. H., Lenca, P., Billot, R., Ryan, T. C., Marsh, J., DeVylder, J., Walter, M., Berrouiguet, S., & Lemey, C. (2021). 
+    Machine Learning and Natural Language Processing in Mental Health: Systematic Review. 
+    <em>Journal of Medical Internet Research</em>, <strong>23</strong>(5), e15708.
+  </li>
+  <li id="rani2024">
+    Rani, S., Ahmed, K., & Subramani, S. (2024). 
+    From Posts to Knowledge: Annotating a Pandemic-Era Reddit Dataset to Navigate Mental Health Narratives. 
+    <em>Applied Sciences</em>, <strong>14</strong>, 1547.
+  </li>
+  <li id="trevor2023">
+    The Trevor Project. (2023). 
+    <em>2023 National Survey on LGBTQ Youth Mental Health</em>. The Trevor Project.
+  </li>
+  <li id="nimh2023">
+    National Institute of Mental Health. (2023). 
+    <em>Mental Illness</em>. National Institute of Health.
+  </li>
+  <li id="olfson2023">
+    Olfson, M., Zuvekas, S. H., McClellan, C., Wall, M. M., Hankerson, S. H., & Blanco, C. (2023). 
+    Racial-Ethnic Disparities in Outpatient Mental Health Care in the United States. 
+    <em>Psychiatric Services</em>, <strong>74</strong>(7), 674–683.
+  </li>
 </ol>
+
 
 </body>
 </html>
