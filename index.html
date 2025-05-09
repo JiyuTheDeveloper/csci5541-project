@@ -1,331 +1,235 @@
 <!DOCTYPE html>
-<!-- saved from url=(0014)about:internet -->
-<html lang=" en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NLP Class Project | Spring 2025 CSCI 5541 | University of Minnesota</title>
 
-  <link rel="stylesheet" href="./files/bulma.min.css" />
-
+  <link rel="stylesheet" href="./files/bulma.min.css">
   <link rel="stylesheet" href="./files/styles.css">
   <link rel="preconnect" href="https://fonts.gstatic.com/">
   <link href="./files/css2" rel="stylesheet">
   <link href="./files/css" rel="stylesheet">
 
+  <style>
+    /* Apply Lato font to the entire page */
+    body {
+      font-family: 'Lato', sans-serif;
+    }
 
-  <base href="." target="_blank"></head>
+    /* Optional: You can further customize if needed */
+    h1, h4 {
+      font-family: 'Lato', sans-serif;
+    }
 
+    .wrapper {
+      font-family: 'Lato', sans-serif;
+    }
+  </style>
+
+  <base href="." target="_blank">
+</head>
 
 <body>
   <div>
     <div class="wrapper">
-      <h1 style="font-family: 'Lato', sans-serif;">Using Sentiment Analysis to measure perception of mental health across different platforms.</h1>
-      <h4 style="font-family: 'Lato', sans-serif; ">Fall 2025 CSCI 5541 NLP: Class Project - University of Minnesota</h4>
-      <h4 style="font-family: 'Lato', sans-serif; ">Golden Data Retrievers</h4>
+      <h1>Using Sentiment Analysis to Measure Perception of Mental Health Across Different Platforms</h1>
+      <h4>Fall 2025 CSCI 5541 NLP: Class Project - University of Minnesota</h4>
+      <h4>Golden Data Retrievers</h4>
 
       <div class="authors-wrapper">
-        
         <div class="author-container">
           <div class="author-image">
-                        
-              <img src="">
-            
-            
-          </div>
-          <p>
-                        
-              Jiyu Huang
-            
-          </p>
-        </div>
-        
-        <div class="author-container">
-          <div class="author-image">
-            
             <img src="">
-            
           </div>
-          <p>
-            
-            Ziqi Zhou
-            
-          </p>
+          <p>Jiyu Huang</p>
         </div>
-        
+
         <div class="author-container">
           <div class="author-image">
-            
-              <img src="./files/kylie_graduation.jpeg">            
-            
+            <img src="">
           </div>
-          <p>
-              Kylie Dyke
-          </p>
+          <p>Ziqi Zhou</p>
         </div>
-        
+
+        <div class="author-container">
+          <div class="author-image">
+            <img src="./files/kylie_graduation.jpeg">
+          </div>
+          <p>Kylie Dyke</p>
+        </div>
       </div>
 
       <br/>
 
       <div class="authors-wrapper">
         <div class="publication-links">
-          <!-- Github link -->
           <span class="link-block">
-            <a
-              href=""
-              target="_blank"
-              class="external-link button is-normal is-rounded is-dark is-outlined"
-            >
-            <span>Final Report</span>
+            <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark is-outlined">
+              <span>Final Report</span>
             </a>
           </span>
           <span class="link-block">
-            <a
-              href="https://github.com/JiyuTheDeveloper/csci5541-project/tree/main"
-              target="_blank"
-              class="external-link button is-normal is-rounded is-dark is-outlined"
-            >
-            <span>Code</span>
+            <a href="https://github.com/JiyuTheDeveloper/csci5541-project/tree/main" target="_blank" class="external-link button is-normal is-rounded is-dark is-outlined">
+              <span>Code</span>
             </a>
-          </span>      
+          </span>
           <span class="link-block">
-            <a
-              href=""
-              target="_blank"
-              class="external-link button is-normal is-rounded is-dark is-outlined"
-            >
-            <span>Model Weights</span>
+            <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark is-outlined">
+              <span>Model Weights</span>
             </a>
-          </span>              
+          </span>
         </div>
       </div>
-
-
     </div>
   </div>
 
-
-
-
-
-  
-  
-
-
   <div class="wrapper">
     <hr>
-    
     <h2 id="abstract">Abstract</h2>
+    <p>
+      Large‑scale sentiment studies of Reddit's mental‑health communities require reliable knowledge of who is speaking, yet demographic cues such as gender, race, and queer identity are rarely explicit and have traditionally been identified by slow, manual coding. We introduce a two‑stage pipeline that first filters posts with carefully designed keyword lists and then replaces manual labeling with a lightweight, multi‑label DistilBERT classifier. Trained on a gold‑standard set of 1,724 hand‑annotated posts, the model accurately predicts four binary attributes—mental‑health mention, gender identity, racial identity, and queer identity—allowing us to automate what was previously weeks of expert effort. The resulting, fully labeled corpus reveals that sentiment on mental‑health subreddits differs markedly across social identities; for example, posts authored by queer‑identified users are consistently more negative than those without queer markers, and male-identified posts show slightly more positive sentiment than female-identified ones. By removing the annotation bottleneck, our approach enables far larger, demographically informed analyses of online mental‑health discourse.
+    </p>
 
-<p>
-  Mental health is a pressing public health issue, especially for vulnerable populations, yet online discussions often lack demographic context. This limits our ability to understand how different identities experience and express mental health concerns.
-  <br>
-  We curated and manually annotated Reddit posts for demographic markers (gender, LGBTQ+ identity, racial identity) and applied sentiment analysis using pretrained models (VADER/TextBlob) to assess attitudes toward mental health within these groups.
-</p>
+    <hr>
+    <h2 id="introduction">Motivation</h2>
+    <p>
+      Our ultimate goal was to develop a mental health-focused dataset, establish a robust annotation framework, and then analyze the differences between subpopulations. We then explored how to create an automated classifier to streamline annotation for demographic information in social media posts in future work, saving both time and effort.
+      Current sentiment analysis approaches often apply a generalized perspective without considering demographic factors, limiting our understanding of unique challenges faced by different groups.</strong>
+    </p>
 
-<hr>
+    <p>
+      Right now, researchers use social media data to study mental health, but most of this data is anonymous and lacks demographic information. This means we miss how specific groups feel or struggle differently, and we can’t spot patterns tied to identity.
+      If we’re successful, this will help mental health researchers and advocates better understand the needs of underrepresented groups. It could lead to more targeted support, outreach, and resources for communities that are often overlooked.
+    </p>
 
-<h2 id="introduction">Motivation</h2>
+    <hr>
+    <h2 id="approach">Data Curation</h2>
+    <p>
+      We collected Reddit posts related to mental health, specifically from the Reddit Mental Health Dataset (RMHD) on Kaggle. These posts were specifically from the months of August to November of 2019. We wanted to avoid any bias or impact from the COVID-19 pandemic, so we utilized the months prior to major worldwide impacts. We did not previously consider how the United States presidential election could have affected this when we chose these months; however, there was no mention explicitly regarding the election.
+    </p>
 
-<p>
-<b>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.</b>
-</p>
-<p>
-  Mental health issues are a serious global health concern that disproportionately impacts vulnerable populations. Natural language processing (NLP) has been utilized in the sphere of mental health research for information extraction, sentiment analysis and emotion detection. One rich area of data mining for mental health research are social media platforms like Reddit, that provide spaces where individuals anonymously discuss mental health. However,  this anonymity creates an analytical challenge: the lack of demographic information makes it difficult to analyze how different factors influence sentiments toward mental health. 
-  Current sentiment analysis approaches often apply a generalized perspective without considering demographic factors, limiting our understanding of unique challenges faced by different groups. In our project we aim to create a workflow of curating a dataset from Reddit and then hierarchically analyze the sentiment towards mental health across the dataset.
-</p>
+    <p>
+      These posts were then flagged by an R script with key words for each identity. After flagging, each member of our team worked on manually annotating the self_text (post) with multiple demographic labels. These demographic labels include the mental health of the writer of the post and the earlier defined vulnerable populations: gender identity, LGBTQ+ identity, and race identity. This includes marking a binary indicator, details from a predefined list (that was adjusted as needed), and comments for follow-up or to explain why a flagged term did not result in inclusion.
+    </p>
 
-<p>
-<b>How is it done today, and what are the limits of current practice?</b>
-</p>
-<p>
-  Right now, researchers use social media data to study mental health, but most of this data is anonymous and lacks demographic information. This means we miss how specific groups feel or struggle differently, and we can’t spot patterns tied to identity.
-<p>
+    <p>After reading a post, the annotator fills in the following columns:</p>
 
-<p>
-<b>Who cares? If you are successful, what difference will it make?</b>
-</p>
-<p>
-  If we’re successful, this will help mental health researchers and advocates better understand the needs of underrepresented groups. It could lead to more targeted support, outreach, and resources for communities that are often overlooked.
-</p>
-
-<hr>
-
-<h2 id="approach">Data Curation</h2>
-
-<p>
-<b>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</b>
-</p>
-
-<p>
-  
-We collected Reddit posts related to mental health, specifically from the Reddit Mental Health Dataset (RMHD) on Kaggle. These posts were specifically from the months of August to November of 2019. We wanted to avoid any bias or impact from the COVID-19 pandemic, so utilized the months prior to major worldwide impacts. 
-
-<p>
-These posts were then flagged by an R script with key words for each identity. After flagging, each member of our team worked on manually annotating the self_text (post) with multiple demographic labels. These demographic labels include mental health of the writer of the post and the earlier defined vulnerable populations: gender identity, LGBTQ+ identity, and race identity. This includes marking a binary indicator, details from a predefined list (that was adjusted as needed), and comments for followup or to explain why a flagged term did not result in an inclusion.
-<p>After reading a post, the annotator fills in the following columns:</p>
-
-<ul>
-  <li><strong>Mental health Related:</strong>
     <ul>
-      <li>label_mental_health (binary)</li>
-      <li>disorder (list options)</li>
-      <li>diagnosed (binary)</li>
-      <li>SeekingHelp_copingMechanisms (binary)</li>
-      <li>details (free text)</li>
+      <li><strong>Mental health Related:</strong>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+          <li>label_mental_health (binary)</li>
+          <li>disorder (list options)</li>
+          <li>diagnosed (binary)</li>
+          <li>SeekingHelp_copingMechanisms (binary)</li>
+          <li>details (free text)</li>
+        </ul>
+      </li>
+
+      <li><strong>Gender Identity Related:</strong>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+          <li>label_Gender_Identity (binary)</li>
+          <li>Gender_Identity (list options)</li>
+          <li>Details (free text)</li>
+        </ul>
+      </li>
+
+      <li><strong>Race Identity Related:</strong>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+          <li>label_racial_identity (binary)</li>
+          <li>race_identity (list options)</li>
+          <li>race_identity_specific (free text)</li>
+        </ul>
+      </li>
+
+      <li><strong>Queer Identity Related:</strong>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+          <li>label_queer_identity (binary)</li>
+          <li>queer_identity (list options)</li>
+          <li>extra_comments (free text)</li>
+        </ul>
+      </li>
     </ul>
-  </li>
 
-  <li><strong>Gender Identity Related:</strong>
-    <ul>
-      <li>label_Gender_Identity (binary)</li>
-      <li>Gender_Identity (list options)</li>
-      <li>Details (free text)</li>
-    </ul>
-  </li>
+    <p>If there was any doubt regarding classification, the annotator would reach out to fellow annotators for ruling.</p>
 
-  <li><strong>Race Identity Related:</strong>
-    <ul>
-      <li>label_racial_identity (binary)</li>
-      <li>race_identity (list options)</li>
-      <li>race_identity_specific (free text)</li>
-    </ul>
-  </li>
+    <hr>
 
-  <li><strong>Queer Identity Related:</strong>
-    <ul>
-      <li>label_queer_identity (binary)</li>
-      <li>queer_identity (list options)</li>
-      <li>extra_comments (free text)</li>
-    </ul>
-  </li>
+    <p><b>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</b></p>
 
-  <li>If there was any doubt regarding classification, the annotator would reach out to fellow annotators for ruling.</li>
-</ul>
+    <p>
+      Annotating the data was a lot more time-consuming and mentally draining than anticipated. Our rigorous labeling of the posts meant we spent more time on each post than anticipated, especially if the posts were long (approaching our 3000 character maximum), confusing, or required an extra check by another annotator.
+    </p>
 
-</p>
+    <hr>
 
-<p>
-<b>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</b>
-</p>
+    <h2 id="teaser">Annotation Workflow</h2>
+    <p class="sys-img"><img src="./files/Annotation_workflow.png" alt="imgname" width="800"></p>
 
-<p>
-  Annotating the data was a lot more time consuming and mentally draining than anticipated. Our rigorous labeling of the posts meant we spent more time on each post than anticipated. Especially if the posts were long (approacing our 3000 charachter maximum), confusing or required an extra check by another annotater.
-</p>
+    <h3 id="teaser">Current Demographics</h3>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/Annotation_Demographic.png">
+    </div>
 
+    <hr>
+    <h1 id="Models">Models</h1>
+    <h2 id="Models">Model 1: Vader Sentiment</h2>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_overall_sentiment_distribution_pie.png">
+    </div>
 
-<hr>
+    <h3 id="Models">Model 1: Gender Identity</h3>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_gender_sentiment_distribution.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_gender_sentiment_heatmap.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_gender_sentiment_stacked.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_gender_significance_tests.png">
+    </div>
 
-<h2 id="teaser">Annotation Workflow</h2>
+    <h3 id="Models">Model 1: Queer Identity</h3>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_queer_sentiment_distribution.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_queer_sentiment_heatmap.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_queer_sentiment_stacked.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_queer_significance_tests.png">
+    </div>
 
-<p class="sys-img"><img src="./files/Annotation_workflow.png" alt="imgname" width="800"></p>
+    <h3 id="Models">Model 1: Race Identity</h3>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_race_sentiment_distribution.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_race_sentiment_heatmap.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_race_sentiment_stacked.png">
+    </div>
+    <div style="text-align: center;">
+      <img style="height: 300px;" alt="" src="./files/vader_race_significance_tests.png">
+    </div>
 
-<h3 id="teaser">Current Demographics</h3>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/Annotation_Demographic.png">
-</div>
+    <hr>
+    <h1 id="Conclusion">Conclusion</h1>
 
+    <p>
+      Our NLP-based approach using Vader sentiment analysis highlights significant differences in how individuals from different social identities, including gender, race, and queer identity, discuss mental health on Reddit. This model, combined with our demographic annotation framework, provides valuable insights into the perceptions of mental health across these different groups. As more data is accumulated and models improve, we expect to refine our analysis, providing even more nuanced insights.
+    </p>
 
-<hr>
-<h1 id="Models">Models </h1>
-<h2 id="Models">Model 1: Vader Sentiment</h2>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_overall_sentiment_distribution_pie.png">
-</div>
-<h3 id="Models">Model 1: Gender Identity</h3>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_gender_sentiment_distribution.png">
-</div>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_gender_sentiment_heatmap.png">
-</div>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_gender_sentiment_stacked.png">
-</div>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_gender_significance_tests.png">
-</div>
-  
-<h3 id="Models">Model 1: Queer Identity</h3>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_queer_sentiment_distribution.png">
-</div>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_queer_sentiment_heatmap.png">
-</div>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_queer_sentiment_stacked.png">
-</div>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_queer_significance_tests.png">
-</div>
-  
-
-<h3 id="Models">Model 1: Race Identity</h3>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_race_sentiment_distribution.png">
-</div>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_race_sentiment_heatmap.png">
-</div>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_race_sentiment_stacked.png">
-</div>
-<div style="text-align: center;">
-  <img style="height: 300px;" alt="" src="./files/vader_racial_significance_tests.png">
-</div>
-  
-
-<h2 id="Models">Model 1: Vader Results</h2>
-
-
-<h2 id="Models">Model 2: Trained BERT Sentiment</h2>
-
-
-<h3 id="Models">Model 2: Gender Identity</h3>
-
-
-<h3 id="Models">Model 2: Queer Identity</h3>
-
-<h3 id="Models">Model 2: Race Identity</h3>
-
-<h2 id="Models">Model 2: Trained BERT Results</h2>
-
-<hr>
-    
-<h2 id="results">Results</h2>
-<p>
-<b>How did you measure success? What experiments were used? What were the results, both quantitative and qualitative? Did you succeed? Did you fail? Why?</b>
-</p>
-<p>
-  We measured success by how many Reddit posts could be clearly annotated with demographic information (gender, LGBTQ+ identity, racial identity) and mental health sentiment. Success also included being able to clean and organize the data for downstream analysis.
-  <br>
-  We filtered posts for demographic keyword matches and manually annotated them to confirm their relevance. Then we cleaned the data and structured it into separate subsets for each demographic domain (e.g., gender, queer identity) for easier looping and analysis.
-  <br>
-<div style="text-align: center;">
-<img style="height: 300px;" alt="" src="./files/results.png">
-</div>
-<br>
-
-<hr>
-<h2 id="conclusion">Conclustion and Future Work</h2>
-<p>
-
-  How easily are your results able to be reproduced by others?
-  Did your dataset or annotation affect other people's choice of research or development projects to undertake?
-  Does your work have potential harm or risk to our society? What kinds? If so, how can you address them?
-  What limitations does your model have? How can you extend your work for future research?
-</p>
-<br>
-<p>
-  Our work so far has focused on manually annotating Reddit posts with demographic information, which is a reproducible but time-consuming process. While our method is transparent and can be replicated by others, it requires significant human effort, which may limit broader adoption due to the tedious nature of the task.
-</p>
-<hr>
-
-
+    <h2>Next Steps</h2>
+    <p>We plan to extend our model to other social media platforms and improve its accuracy over time with a more diverse and larger dataset.</p>
   </div>
-  
-
-
-</body></html>
+</body>
+</html>
