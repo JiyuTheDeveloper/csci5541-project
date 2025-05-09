@@ -228,7 +228,7 @@
     <hr>
     <h1 id="Models">Models</h1>
     <h2 id="Models">Model 1: Vader Sentiment</h2>
-
+      <p>VADER (Valence Aware Dictionary and Sentiment Reasoner) is a lexicon and rule-based sentiment analysis tool specifically designed for social media content. We saw it perform with more variety for the Reddit posts compared ot DistilBERT. </p>
     <h3 id="Models">Model 1: Gender Identity</h3>
     <div style="text-align: center;">
       <img style="height: 300px;" alt="" src="./files/Graphs/VADER_gender_sentiment_distribution.png">
@@ -266,7 +266,7 @@
     </div>
 
     <h2 id="Models">Model 2: DistilBERT</h2>
-
+      <p>DistilBERT is a lighter transformer-based model pre-trained for sentiment classification. </p>
     <h3 id="Models">Model 2: Gender Identity</h3>
     <div style="text-align: center;">
       <img style="height: 300px;" alt="" src="./files/Graphs/BERT_gender_sentiment_distribution.png">
@@ -303,7 +303,11 @@
       <img style="height: 300px;" alt="" src="./files/Graphs/BERT_racial_significance_tests.png">
     </div>
 
+    <hr>
+    <h2 id="Evaluation">Demographic Model Evaluation</h2>
 
+    
+    <h2 id="Evaluation">Classification Model Evaluation</h2>
     <table>
       <tr>
         <th>Metric</th>
@@ -327,11 +331,14 @@
       </tr>
     </table>
     
+    <p>Micro-accuracy reports the proportion of correctly predicted labels. Micro-F1 is the average F1 score calculated globally by counting total true positives, false negatives, and flase positives across all labels. It is best when class imbalances exist. Macro-F1 is the average F1 score across classes, giving equal weight to each class. Subset-accuracy was how accurate a proportion of samples where all labels are correctly predicted</p>
+
     <hr>
     <h1 id="Conclusion">Conclusion</h1>
 
     <p>
-      Our NLP-based approach using Vader sentiment analysis highlights significant differences in how individuals from different social identities, including gender, race, and queer identity, discuss mental health on Reddit. This model, combined with our demographic annotation framework, provides valuable insights into the perceptions of mental health across these different groups. As more data is accumulated and models improve, we expect to refine our analysis, providing even more nuanced insights.
+      Our hypothesis was that sentiment towards mental health would differ significantly across demographic groups, reflecting different cultural attitudes, experiences of stigma, and help-seeking behaviors. The automated classification approach would allow us to scale this analysis to much larger datasets than would be possible with manual annotation alone. The results confirm significant sentiment variations across demographic groups, validating both our methodological approach and underlying hypothesis.
+    <br> The model performed best on the more frequent labels (e.g., mental health mention) and showed lower but still useful performance on the rarer demographic attributes.
     </p>
 
     <h2>Next Steps</h2>
